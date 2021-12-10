@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import ForecastItem from "./Components/ForecastItem";
+import { css } from "@emotion/react";
+import CircleLoader from "react-spinners/CircleLoader";
 
 import cloudy from "./Icons/cloudy.png";
 import drizzle from "./Icons/drizzle.png";
@@ -9,11 +11,20 @@ import snow from "./Icons/snow.png";
 import sun from "./Icons/sun.png";
 import thunder from "./Icons/thunder.png";
 
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: black;
+`;
+
 function App() {
   const API_KEY = "7d778abd4f55b299d095dff0cd3360ca";
 
   const containerRef = useRef();
   const { current } = containerRef;
+
+  const [loading, setLoading] = useState(false);
+  const [color, setColor] = useState("#000");
 
   const [input, setInput] = useState("Kiev");
   const [city, setCity] = useState(null);
@@ -86,6 +97,8 @@ function App() {
   }
 
   async function getTemperature() {
+    setLoading(false);
+
     await axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=7d778abd4f55b299d095dff0cd3360ca`
@@ -94,11 +107,13 @@ function App() {
         latitude = res.data["coord"]["lat"];
         longitude = res.data["coord"]["lon"];
         setCity(input.charAt(0).toUpperCase() + input.slice(1).toLowerCase());
+        setLoading(true);
       })
       .catch(function (err) {
         console.error(err.response);
         alert("Сity Not Found");
         isFalse = true;
+        setLoading(true);
         return;
       });
 
@@ -185,7 +200,8 @@ function App() {
       <header>
         <h1>WEATHER APP</h1>
       </header>
-      <div className="container">
+      
+      {loading ? <div className="container">
         <main>
           <form onSubmit={(e) => e.preventDefault()}>
             <input
@@ -241,7 +257,7 @@ function App() {
             />
           </div>
         </main>
-      </div>
+      </div> : <CircleLoader color={color} css={override} size={50} />}
     </div>
   );
 }
