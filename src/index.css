@@ -11,8 +11,9 @@ body {
   background-color: #f9fbfc;
 }
 
-h1, p {
-    color: #393939;
+h1,
+p {
+  color: #393939;
 }
 
 .App {
@@ -47,6 +48,7 @@ header h1 {
   line-height: 42px;
   font-size: 25px;
   letter-spacing: 1px;
+  margin: 0;
 }
 
 main {
@@ -76,7 +78,7 @@ input::placeholder {
 }
 
 .submit-city {
-    display: none;
+  display: none;
 }
 
 .weather-info {
@@ -131,6 +133,6 @@ input::placeholder {
 }
 
 .week-weather-container_item p {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
