@@ -70,9 +70,6 @@ function App() {
     },
   });
 
-  let longitude = 0;
-  let latitude = 0;
-
   let isFalse = false;
 
   function currentDayCondition(condition) {
@@ -104,8 +101,6 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=7d778abd4f55b299d095dff0cd3360ca`
       )
       .then((res) => {
-        latitude = res.data["coord"]["lat"];
-        longitude = res.data["coord"]["lon"];
         setCity(input.charAt(0).toUpperCase() + input.slice(1).toLowerCase());
         setLoading(true);
       })
