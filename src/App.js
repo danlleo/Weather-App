@@ -98,7 +98,7 @@ function App() {
 
     await axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=7d778abd4f55b299d095dff0cd3360ca`
+        `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${API_KEY}`
       )
       .then((res) => {
         setCity(input.charAt(0).toUpperCase() + input.slice(1).toLowerCase());
